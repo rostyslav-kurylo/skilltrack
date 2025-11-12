@@ -1,0 +1,43 @@
+:root {
+    --bg: #f6f8fb;
+    --card: #fff;
+    --accent: #1976d2
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial;
+    background: var(--bg);
+    color: #111
+}
+
+.container {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 16px
+}
+
+.card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06)
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
