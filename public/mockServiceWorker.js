@@ -117,7 +117,11 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(
     handleRequest(event, requestId).catch((error) => {
       if (error.name === 'NetworkError') {
-        console.warn('[MSW] Successfully emulated a network error for the "%s %s" request.', request.method, request.url);
+        console.warn(
+          '[MSW] Successfully emulated a network error for the "%s %s" request.',
+          request.method,
+          request.url
+        );
         return;
       }
 

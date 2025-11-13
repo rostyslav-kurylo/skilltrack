@@ -54,7 +54,13 @@ const SkillsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <TextField className="filter-input" label={t('filter')} value={filter} onChange={(e) => setFilter(e.target.value)} placeholder={t('filterPlaceholder')} />
+          <TextField
+            className="filter-input"
+            label={t('filter')}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder={t('filterPlaceholder')}
+          />
           <Grid container spacing={2}>
             {filteredSkills.map((s) => (
               <Grid key={s.id} size={{ xs: 12, md: 6 }}>
@@ -65,7 +71,7 @@ const SkillsPage: React.FC = () => {
                       <Typography variant="body2">{t('levelValue', { level: s.level })}</Typography>
                     </div>
                     <div>
-                      <IconButton onClick={() => handleEdit(s.id)}>
+                      <IconButton aria-label="edit" onClick={() => handleEdit(s.id)}>
                         <EditIcon />
                       </IconButton>
                       <IconButton onClick={() => handleDelete(s.id)}>

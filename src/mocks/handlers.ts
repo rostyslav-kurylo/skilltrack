@@ -89,7 +89,9 @@ export const handlers = [
   rest.get('/api/export', (req, res, ctx) => {
     const header = ['id', 'name', 'level', 'notes', 'updatedAt'];
     const rows = skills.map((s) => [s.id, s.name, String(s.level), s.notes || '', s.updatedAt]);
-    const csv = [header, ...rows].map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+    const csv = [header, ...rows]
+      .map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(','))
+      .join('\n');
     return res(ctx.delay(100), ctx.status(200), ctx.body(csv), ctx.set('Content-Type', 'text/csv'));
   }),
 ];
