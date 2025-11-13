@@ -44,10 +44,10 @@ const SkillsPage: React.FC = () => {
 
   return (
     <div className="skills-page">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom component="h1" tabIndex={0}>
         {t('skills')}
       </Typography>
-      <Card className="card">
+      <Card className="card" component="section" aria-label={t('add')}>
         <SkillForm editingId={editing} onDone={handleDone} />
       </Card>
       {loading ? (
@@ -60,21 +60,24 @@ const SkillsPage: React.FC = () => {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder={t('filterPlaceholder')}
+            inputProps={{ 'aria-label': t('filter') }}
           />
-          <Grid container spacing={2}>
+          <Grid container spacing={2} aria-label={t('skills')}>
             {filteredSkills.map((s) => (
               <Grid key={s.id} size={{ xs: 12, md: 6 }}>
-                <Card className="card">
+                <Card className="card" component="article" aria-labelledby={`skill-title-${s.id}`}>
                   <div className="card-content">
                     <div>
-                      <Typography variant="h6">{s.name}</Typography>
+                      <Typography variant="h6" id={`skill-title-${s.id}`} tabIndex={0}>
+                        {s.name}
+                      </Typography>
                       <Typography variant="body2">{t('levelValue', { level: s.level })}</Typography>
                     </div>
                     <div>
-                      <IconButton aria-label="edit" onClick={() => handleEdit(s.id)}>
+                      <IconButton aria-label={t('edit') + ' ' + s.name} onClick={() => handleEdit(s.id)}>
                         <EditIcon />
                       </IconButton>
-                      <IconButton onClick={() => handleDelete(s.id)}>
+                      <IconButton aria-label={t('delete') + ' ' + s.name} onClick={() => handleDelete(s.id)}>
                         <DeleteIcon />
                       </IconButton>
                     </div>
@@ -91,7 +94,7 @@ const SkillsPage: React.FC = () => {
         </>
       )}
       <div className="export-button-container">
-        <Button variant="outlined" onClick={exportCSV}>
+        <Button variant="outlined" onClick={exportCSV} aria-label={t('exportCsv')}>
           {t('exportCsv')}
         </Button>
       </div>

@@ -27,19 +27,29 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="dashboard-page">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom component="h1" tabIndex={0}>
         {t('dashboard')}
       </Typography>
-      <Card className="card">
+      <Card className="card" component="section" aria-label={t('skills')}>
         {loading ? (
           <Loading />
         ) : (
-          <div className="bar-chart fade-in">
-            <Bar data={data} />
+          <div className="bar-chart fade-in" role="region" aria-label={t('skills')}>
+            <Bar
+              data={data}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { x: { ticks: { autoSkip: false } } },
+              }}
+              height={300}
+              aria-label={t('skills')}
+            />
           </div>
         )}
       </Card>
-      <Card className="card">
+      <Card className="card" component="section" aria-label={t('lastUpdate')}>
         <Typography variant="body2">
           {t('lastUpdate', {
             date: skills.length ? format(new Date(skills[0].updatedAt), 'PPpp') : '—',

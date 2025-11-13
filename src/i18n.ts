@@ -19,6 +19,8 @@ const resources = {
       updated: 'Updated: {{date}}',
       filter: 'Filter',
       filterPlaceholder: 'e.g. React|JS',
+      edit: 'Edit',
+      delete: 'Delete',
     },
   },
   ua: {
@@ -38,6 +40,8 @@ const resources = {
       updated: 'Оновлено: {{date}}',
       filter: 'Фільтр',
       filterPlaceholder: 'Наприклад React|JS',
+      edit: 'Редагувати',
+      delete: 'Видалити',
     },
   },
 };
