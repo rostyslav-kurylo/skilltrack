@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Container, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import DashboardPage from './pages/DashboardPage/DashboardPage';
-import SkillsPage from './pages/SkillsPage/SkillsPage';
-import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
+import { DashboardPage, SkillsPage } from './pages';
+import { LanguageSwitcher } from './components';
+import { LANG_KEY } from './shared/constants';
 
 export default function App() {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem(LANG_KEY);
+    if (storedLang && storedLang !== i18n.language) {
+      i18n.changeLanguage(storedLang);
+    }
+  }, []);
+
   return (
     <div>
       <AppBar position='static'>

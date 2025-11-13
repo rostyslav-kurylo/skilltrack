@@ -1,12 +1,5 @@
 import { rest } from 'msw';
-
-type Skill = {
-  id: string;
-  name: string;
-  level: number;
-  notes?: string;
-  updatedAt: string;
-};
+import { Skill } from '../shared/interface';
 
 let skills: Skill[] = [
   {
@@ -60,20 +53,6 @@ let skills: Skill[] = [
   },
   {
     id: '7',
-    name: 'SQL',
-    level: 40,
-    notes: 'Joins, Queries',
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: '8',
-    name: 'Docker',
-    level: 30,
-    notes: 'Containers, Compose',
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: '9',
     name: 'GraphQL',
     level: 35,
     notes: 'Queries, Mutations, Apollo',

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { TextField, Button } from '@mui/material';
-import { useSkillStore } from '../../store/useSkillStore';
+import { Button, TextField } from '@mui/material';
 import DOMPurify from 'dompurify';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { useSkillStore } from '../../store/useSkillStore';
 
 const schema = z.object({
   name: z.string().min(1),
@@ -13,42 +14,48 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
-const SkillForm: React.FC<{
+type SkillFormProps = {
   editingId?: string | null;
   onDone?: () => void;
-}> = ({ editingId, onDone }) => {
+};
+
+const getDefaultValues = () => ({ name: '', notes: '', level: 0 });
+
+const SkillForm: React.FC<SkillFormProps> = ({ editingId, onDone }) => {
+  const { t } = useTranslation();
   const { skills, add, update } = useSkillStore();
   const { register, handleSubmit, reset, setValue } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { level: 0 },
+    defaultValues: getDefaultValues(),
   });
 
   useEffect(() => {
     if (editingId) {
-      const s = skills.find((x) => x.id === editingId);
-      if (s) {
-        setValue('name', s.name);
-        setValue('level', s.level);
-        setValue('notes', s.notes || '');
+      const skill = skills.find((x) => x.id === editingId);
+      if (skill) {
+        setValue('name', skill.name);
+        setValue('level', skill.level);
+        setValue('notes', skill.notes || '');
       }
     } else {
-      reset({ level: 0, name: '', notes: '' });
+      reset(getDefaultValues());
     }
-  }, [editingId]);
+  }, [editingId, skills, setValue, reset]);
 
   const onSubmit = async (data: FormData) => {
     const safeNotes = data.notes ? DOMPurify.sanitize(data.notes) : undefined;
+    const payload = {
+      name: data.name,
+      level: data.level || 0,
+      notes: safeNotes,
+    };
     if (editingId) {
-      await update(editingId, {
-        name: data.name,
-        level: data.level || 0,
-        notes: safeNotes,
-      });
+      await update(editingId, payload);
     } else {
-      await add({ name: data.name, level: data.level || 0, notes: safeNotes });
+      await add(payload);
     }
-    reset();
-    onDone && onDone();
+    reset(getDefaultValues());
+    if (onDone) onDone();
   };
 
   return (
@@ -56,15 +63,24 @@ const SkillForm: React.FC<{
       onSubmit={handleSubmit(onSubmit)}
       style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}
     >
-      <TextField label='Skill' {...register('name')} />
       <TextField
-        label='Level'
+        label={t('skill')}
+        InputLabelProps={{ shrink: true }}
+        {...register('name')}
+      />
+      <TextField
+        label={t('level')}
+        InputLabelProps={{ shrink: true }}
         type='number'
         {...register('level', { valueAsNumber: true })}
       />
-      <TextField label='Notes' {...register('notes')} />
+      <TextField
+        label={t('notes')}
+        InputLabelProps={{ shrink: true }}
+        {...register('notes')}
+      />
       <Button type='submit' variant='contained'>
-        Save
+        {t('add')}
       </Button>
     </form>
   );

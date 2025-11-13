@@ -1,0 +1,21 @@
+.dashboard-page .card {
+    margin-bottom: 12px;
+}
+
+.dashboard-page .bar-chart {
+    height: 100%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.dashboard-page .fade-in {
+    animation: fadeIn 0.8s ease-in;
+}

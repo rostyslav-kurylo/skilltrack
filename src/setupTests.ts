@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
-import fetchMock from 'jest-fetch-mock';
 import i18n from 'i18next';
+import fetchMock from 'jest-fetch-mock';
 import { initReactI18next } from 'react-i18next';
 
 fetchMock.enableMocks();

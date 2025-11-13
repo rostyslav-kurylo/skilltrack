@@ -10,8 +10,10 @@ import { format } from 'date-fns';
 import React, { useEffect, useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
-import Loading from '../../components/Loading/Loading';
+import { Loading } from '../../components';
 import { useSkillStore } from '../../store/useSkillStore';
+
+import './DashboardPage.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
@@ -32,17 +34,15 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='dashboard-page'>
       <Typography variant='h4' gutterBottom>
         {t('dashboard')}
       </Typography>
-      <Card className='card' style={{ marginBottom: 12 }}>
-        <Typography variant='h6'>{t('overview')}</Typography>
+      <Card className='card'>
         {loading ? (
-          // <div>{t('loading')}</div>
           <Loading />
         ) : (
-          <div className='fade-in' style={{ height: '100%' }}>
+          <div className='bar-chart fade-in'>
             <Bar data={data} />
           </div>
         )}

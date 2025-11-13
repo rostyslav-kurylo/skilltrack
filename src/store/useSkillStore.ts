@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Skill } from '../api/fakeApi';
+import { Skill } from '../shared/interface';
 
 type State = {
   skills: Skill[];
