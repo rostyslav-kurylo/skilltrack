@@ -36,6 +36,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/skills" element={<SkillsPage />} />
+          <Route
+            path="*"
+            element={
+              <Typography variant="h5" component="div" sx={{ mt: 4, textAlign: 'center' }} role="alert">
+                {i18n.t('pageNotFound')}
+              </Typography>
+            }
+          />
         </Routes>
       </Container>
     </div>
