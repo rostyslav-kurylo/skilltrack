@@ -1,18 +1,18 @@
 .skills-page .card {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .skills-page .card .card-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .skills-page .export-button-container {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .skills-page .filter-input {
-    margin: 16px 0;
-    width: 100%;
+  margin: 16px 0;
+  width: 100%;
 }

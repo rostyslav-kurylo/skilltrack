@@ -18,24 +18,24 @@ export default function App() {
 
   return (
     <div>
-      <AppBar position='static'>
+      <AppBar position="static">
         <Toolbar>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             SkillTrack
           </Typography>
-          <Button color='inherit' component={Link} to='/'>
+          <Button color="inherit" component={Link} to="/">
             Dashboard
           </Button>
-          <Button color='inherit' component={Link} to='/skills'>
+          <Button color="inherit" component={Link} to="/skills">
             Skills
           </Button>
           <LanguageSwitcher />
         </Toolbar>
       </AppBar>
-      <Container className='container'>
+      <Container className="container">
         <Routes>
-          <Route path='/' element={<DashboardPage />} />
-          <Route path='/skills' element={<SkillsPage />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
         </Routes>
       </Container>
     </div>

@@ -59,27 +59,11 @@ const SkillForm: React.FC<SkillFormProps> = ({ editingId, onDone }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}
-    >
-      <TextField
-        label={t('skill')}
-        InputLabelProps={{ shrink: true }}
-        {...register('name')}
-      />
-      <TextField
-        label={t('level')}
-        InputLabelProps={{ shrink: true }}
-        type='number'
-        {...register('level', { valueAsNumber: true })}
-      />
-      <TextField
-        label={t('notes')}
-        InputLabelProps={{ shrink: true }}
-        {...register('notes')}
-      />
-      <Button type='submit' variant='contained'>
+    <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <TextField label={t('skill')} InputLabelProps={{ shrink: true }} {...register('name')} />
+      <TextField label={t('level')} InputLabelProps={{ shrink: true }} type="number" {...register('level', { valueAsNumber: true })} />
+      <TextField label={t('notes')} InputLabelProps={{ shrink: true }} {...register('notes')} />
+      <Button type="submit" variant="contained">
         {t('add')}
       </Button>
     </form>

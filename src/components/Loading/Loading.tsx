@@ -3,8 +3,8 @@ import React from 'react';
 import './Loading.css';
 
 const Loading: React.FC = () => (
-  <div className='loading'>
-    <div className='loading-spinner'></div>
+  <div className="loading">
+    <div className="loading-spinner"></div>
   </div>
 );
 

@@ -43,34 +43,26 @@ const SkillsPage: React.FC = () => {
   };
 
   return (
-    <div className='skills-page'>
-      <Typography variant='h4' gutterBottom>
+    <div className="skills-page">
+      <Typography variant="h4" gutterBottom>
         {t('skills')}
       </Typography>
-      <Card className='card'>
+      <Card className="card">
         <SkillForm editingId={editing} onDone={handleDone} />
       </Card>
       {loading ? (
         <Loading />
       ) : (
         <>
-          <TextField
-            className='filter-input'
-            label={t('filter')}
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            placeholder={t('filterPlaceholder')}
-          />
+          <TextField className="filter-input" label={t('filter')} value={filter} onChange={(e) => setFilter(e.target.value)} placeholder={t('filterPlaceholder')} />
           <Grid container spacing={2}>
             {filteredSkills.map((s) => (
               <Grid key={s.id} size={{ xs: 12, md: 6 }}>
-                <Card className='card'>
-                  <div className='card-content'>
+                <Card className="card">
+                  <div className="card-content">
                     <div>
-                      <Typography variant='h6'>{s.name}</Typography>
-                      <Typography variant='body2'>
-                        {t('levelValue', { level: s.level })}
-                      </Typography>
+                      <Typography variant="h6">{s.name}</Typography>
+                      <Typography variant="body2">{t('levelValue', { level: s.level })}</Typography>
                     </div>
                     <div>
                       <IconButton onClick={() => handleEdit(s.id)}>
@@ -81,7 +73,7 @@ const SkillsPage: React.FC = () => {
                       </IconButton>
                     </div>
                   </div>
-                  <Typography variant='caption'>
+                  <Typography variant="caption">
                     {t('updated', {
                       date: new Date(s.updatedAt).toLocaleString(),
                     })}
@@ -92,8 +84,8 @@ const SkillsPage: React.FC = () => {
           </Grid>
         </>
       )}
-      <div className='export-button-container'>
-        <Button variant='outlined' onClick={exportCSV}>
+      <div className="export-button-container">
+        <Button variant="outlined" onClick={exportCSV}>
           {t('exportCsv')}
         </Button>
       </div>

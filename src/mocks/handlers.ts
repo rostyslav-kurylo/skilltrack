@@ -77,9 +77,7 @@ export const handlers = [
   rest.put('/api/skills/:id', async (req, res, ctx) => {
     const { id } = req.params;
     const patch = await req.json();
-    skills = skills.map((s) =>
-      s.id === id ? { ...s, ...patch, updatedAt: new Date().toISOString() } : s
-    );
+    skills = skills.map((s) => (s.id === id ? { ...s, ...patch, updatedAt: new Date().toISOString() } : s));
     const updated = skills.find((s) => s.id === id);
     return res(ctx.delay(200), ctx.status(200), ctx.json(updated));
   }),
@@ -90,23 +88,8 @@ export const handlers = [
   }),
   rest.get('/api/export', (req, res, ctx) => {
     const header = ['id', 'name', 'level', 'notes', 'updatedAt'];
-    const rows = skills.map((s) => [
-      s.id,
-      s.name,
-      String(s.level),
-      s.notes || '',
-      s.updatedAt,
-    ]);
-    const csv = [header, ...rows]
-      .map((r) =>
-        r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')
-      )
-      .join('\n');
-    return res(
-      ctx.delay(100),
-      ctx.status(200),
-      ctx.body(csv),
-      ctx.set('Content-Type', 'text/csv')
-    );
+    const rows = skills.map((s) => [s.id, s.name, String(s.level), s.notes || '', s.updatedAt]);
+    const csv = [header, ...rows].map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+    return res(ctx.delay(100), ctx.status(200), ctx.body(csv), ctx.set('Content-Type', 'text/csv'));
   }),
 ];
