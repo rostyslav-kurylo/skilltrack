@@ -3,25 +3,22 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SkillsPage from './SkillsPage';
 
-beforeEach(() => {
-  fetchMock.resetMocks();
-});
 describe('SkillsPage', () => {
   beforeEach(() => {
-    fetchMock.resetMocks();
+    (fetch as jest.Mock).mockReset();
   });
 
   it('should render component header and items', async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify([
+    (fetch as jest.Mock).mockResolvedValueOnce({
+      json: async () => [
         {
           id: '1',
           name: 'Test',
           level: 10,
           updatedAt: new Date().toISOString(),
         },
-      ])
-    );
+      ],
+    });
 
     render(<SkillsPage />);
 
@@ -30,13 +27,13 @@ describe('SkillsPage', () => {
   });
 
   it('should filter skills by regexp', async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify([
+    (fetch as jest.Mock).mockResolvedValueOnce({
+      json: async () => [
         { id: '1', name: 'React', level: 80, updatedAt: new Date().toISOString() },
         { id: '2', name: 'Angular', level: 60, updatedAt: new Date().toISOString() },
         { id: '3', name: 'Vue', level: 50, updatedAt: new Date().toISOString() },
-      ])
-    );
+      ],
+    });
 
     render(<SkillsPage />);
 
@@ -52,9 +49,9 @@ describe('SkillsPage', () => {
   });
 
   it('should enter editing mode when edit button is clicked', async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify([{ id: '1', name: 'React', level: 80, updatedAt: new Date().toISOString() }])
-    );
+    (fetch as jest.Mock).mockResolvedValueOnce({
+      json: async () => [{ id: '1', name: 'React', level: 80, updatedAt: new Date().toISOString() }],
+    });
 
     render(<SkillsPage />);
 
