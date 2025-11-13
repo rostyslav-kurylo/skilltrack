@@ -1,6 +1,6 @@
 # SkillTrack
 
-Project for skill tracking with
+Project for skill tracking
 
 ## Getting Started
 
